@@ -1,2 +1,2 @@
-# facegit-http
-facegit-http
+- git-http-backend
+- ssh
