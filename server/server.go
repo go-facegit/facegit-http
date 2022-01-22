@@ -238,9 +238,7 @@ func packetWrite(str string) []byte {
 func serviceRpc(hr HandlerReq) {
 	w, r, rpc, dir := hr.w, hr.r, hr.Rpc, hr.Dir
 
-	fmt.Println(w, r, rpc, dir)
 	access := hasAccess(r, dir, rpc, true)
-
 	if access == false {
 		renderNoAccess(w)
 		return
@@ -257,16 +255,6 @@ func serviceRpc(hr HandlerReq) {
 	if DefaultConfig.DefaultEnv != "" {
 		env = append(env, DefaultConfig.DefaultEnv)
 	}
-
-	// user, password, authok := r.BasicAuth()
-	// if authok {
-	// 	if DefaultConfig.AuthUserEnvVar != "" {
-	// 		env = append(env, fmt.Sprintf("%s=%s", DefaultConfig.AuthUserEnvVar, user))
-	// 	}
-	// 	if DefaultConfig.AuthPassEnvVar != "" {
-	// 		env = append(env, fmt.Sprintf("%s=%s", DefaultConfig.AuthPassEnvVar, password))
-	// 	}
-	// }
 
 	args := []string{rpc, "--stateless-rpc", dir}
 	cmd := exec.Command(DefaultConfig.GitBinPath, args...)
